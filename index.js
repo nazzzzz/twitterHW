@@ -4,7 +4,7 @@ var Twit = require('twit');
 
 
 var T = new Twit({
-  
+  //access keys
 });
 
 //https://www.w3schools.com/js/js_random.asp
