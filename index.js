@@ -3,8 +3,8 @@ var Twit = require('twit');
 
 
 
-var T = new Twit({
-  //access keys
+var bot = new Twit({
+//access keys
 });
 
 //https://www.w3schools.com/js/js_random.asp
@@ -12,7 +12,7 @@ function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
-T.get('search/tweets', { q: '"fake news"', result_type: 'recent'}, function(err, data, response) {
+bot.get('search/tweets', { q: '"fake news"', result_type: 'recent'}, function(err, data, response) {
   var tweets = data.statuses.filter(function(t) {
     if (t.text.toUpperCase().includes('FAKE NEWS')) {
       return true;
@@ -105,6 +105,8 @@ T.get('search/tweets', { q: '"fake news"', result_type: 'recent'}, function(err,
 
 "Each rubber molecule is made of 65,000 individual atoms."
 ];
+
+
   var tweet = tweets[Math.floor(Math.random() * tweets.length)];;
   var text = tweet.text;
   var fact = facts[getRndInteger(0, facts.length)]
