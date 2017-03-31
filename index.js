@@ -4,10 +4,7 @@ var Twit = require('twit');
 
 
 var bot = new Twit({
-  consumer_key: 'HXrqwGIW4n8ooATKd1q4EDTb3',
-  consumer_secret: 'Xd3EjKHS0wTkVdLeR0GBfVxuR5VYNYUL4qJIxSwyXPW4tuTJIW',
-  access_token: '846091013596872709-TcS783jchRL5V3oiDVJBtFthSZ0u8Ps',
-  access_token_secret: 'iGVskHJN6CrjBtgdRwd3ULeoV33eUOwc6e50vQmGC7uDm'
+//access keys
 });
 
 //https://www.w3schools.com/js/js_random.asp
