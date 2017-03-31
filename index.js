@@ -3,7 +3,7 @@ var Twit = require('twit');
 
 
 
-var T = new Twit({
+var bot = new Twit({
   consumer_key: 'HXrqwGIW4n8ooATKd1q4EDTb3',
   consumer_secret: 'Xd3EjKHS0wTkVdLeR0GBfVxuR5VYNYUL4qJIxSwyXPW4tuTJIW',
   access_token: '846091013596872709-TcS783jchRL5V3oiDVJBtFthSZ0u8Ps',
@@ -15,7 +15,7 @@ function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
-T.get('search/tweets', { q: '"fake news"', result_type: 'recent'}, function(err, data, response) {
+bot.get('search/tweets', { q: '"fake news"', result_type: 'recent'}, function(err, data, response) {
   var tweets = data.statuses.filter(function(t) {
     if (t.text.toUpperCase().includes('FAKE NEWS')) {
       return true;
@@ -52,7 +52,7 @@ T.get('search/tweets', { q: '"fake news"', result_type: 'recent'}, function(err,
 
 "Female black widow spiders eat their males after mating.",
 
-"If our Sun were just inch in diameter, the nearest star would be 445 miles away.",
+"If our Sun were just an inch in diameter, the nearest star would be 445 miles away.",
 
 "The Australian billygoat plum contains 100 times more vitamin C than an orange.",
 
@@ -108,16 +108,42 @@ T.get('search/tweets', { q: '"fake news"', result_type: 'recent'}, function(err,
 
 "Each rubber molecule is made of 65,000 individual atoms."
 ];
+
+
   var tweet = tweets[Math.floor(Math.random() * tweets.length)];;
+  var nameID = tweet.id_str;
+  //console.log(tweet);
   var text = tweet.text;
   var fact = facts[getRndInteger(0, facts.length)]
   
-  text = '. @' + tweet.user.screen_name + ' Here is a scientific fact for you: ' + fact;
+  //console.log(tweet.id_str);
+  text = 'Here is a scientific fact for you, @' + tweet.user.screen_name + ': ' + fact;
   text = text.substring(0, 140);
   
-  console.log(text);
-  T.post('statuses/update', { status: text }, function(err, data, response) {
-    console.log(data)
+  var myTweet = {
+    in_reply_to_status_id_str: nameID,
+    status: text
+  }
+
+
+  //console.log(text);
+  bot.post('statuses/update', myTweet, function(err, data, response) {
+    //console.log(data)
   })
  
 });
+
+/*bot.get('statuses/show/847603191134822400', function (err, reply) {
+  if (err) return console.log('error:', err)
+
+  console.log(reply)
+
+})
+
+/*bot.post('statuses/update', {
+    in_reply_to_status_id: '847603191134822400',
+    status: '@brucebarbet2 test'
+  }, function(err, data, response) {
+    //console.log(data)
+  })
+  */
